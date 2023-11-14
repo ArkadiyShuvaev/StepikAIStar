@@ -1,0 +1,47 @@
+// For format details, see https://aka.ms/vscode-remote/devcontainer.json or this file's README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.134.0/containers/markdown
+{
+	"name": "jupyter-devbox",
+	"dockerFile": "Dockerfile",
+	// config settings you would have in ".vscode/settings.json"
+	"customizations": {
+		"vscode": {
+			// Add the IDs of extensions you want installed when the container is created.
+			"extensions": [
+				"dbaeumer.vscode-eslint",
+				"EditorConfig.EditorConfig",
+				"ms-python.python",
+				"ms-vscode.cpptools",
+				"twxs.cmake",
+				"did1335.opencv-intellisense",
+				"gsgupta.opencv-snippets",
+				"yzhang.markdown-all-in-one",
+				"streetsidesoftware.code-spell-checker"
+			],
+			"settings": {
+				"terminal.integrated.defaultProfile.linux": "zsh"
+			}
+		}
+	},
+	// -- External Ports --
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	//"forwardPorts": [],
+	//
+	// -- Internal Ports --
+	// Use the next line if you want to publish any ports.
+	// Jupyter Notebook listening on port 8888...
+	// TensorBoard listening on port 6006...
+	"appPort": [
+		"8888:8888",
+		"6006:6006"
+	],
+	// After Starting the Container, start the jupyter notebook
+	"postStartCommand": "bash start-notebook.sh &",
+	//
+	// Uncomment to connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root.
+	"remoteUser": "vscode"
+	//
+	//"mounts": [
+	//	"source=${localWorkspaceFolder},target=/home/ws-mount,type=bind,consistency=cached"
+	//]
+}

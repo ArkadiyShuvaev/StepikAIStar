@@ -27,6 +27,7 @@ def no_numpy_mult(a, b):
       result = np.empty(a.shape[0])
       for row_idx_in_a in range(a.shape[0]):
         for item_idx_in_column_b in range(b.shape[1]):
+          break
 
 
     # def multiply_matrices(a, b):
@@ -39,4 +40,14 @@ def no_numpy_mult(a, b):
     ensure_size(a, b)
     return a
 
-no_numpy_mult(a, b)
+
+a = np.random.sample((2, 5))
+b = np.random.sample((5, 3))
+
+print(a)
+print(b)
+
+print(a.shape[1])
+print(b.shape[0])
+
+# no_numpy_mult(a, b)

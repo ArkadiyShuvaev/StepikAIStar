@@ -1,6 +1,46 @@
 import numpy as np
 
+# pure Python
 def no_numpy_mult(a, b):
+    """
+    A: list of "size" lists, each contains "size" floats. The size is N x M.
+    B: list of "size" lists, each contains "size" floats. The size is M x K.
+    return C: list of "size" lists, each contains "size" floats. The result size is N x K.
+    """
+
+    def ensure_size(a, b):
+      if (len(a[0]) != len(b)):
+        raise Exception("size")
+
+    def multiply_matrices(a, b) -> list[list[float]]:
+      result = [[0.0 for _ in range(len(b[0]))] for _ in range(len(a))]
+
+      for i in range(len(result)):
+        for j in range(len(result[0])):
+          for m in range(len(a[0])):
+            result[i][j] += a[i][m] * b[m][j]
+
+      return result
+
+    ensure_size(a, b)
+    result = multiply_matrices(a, b)
+
+    return result
+
+def numpy_mult(first, second):
+    """
+    A: np.array[size, size]              --- первая матрица-аргумент
+    B: np.array[size, size]              --- вторая матрица-аргумент
+    return C: np.array[size, size]       --- матрица, являющаяся результатом умножения матриц A и B
+
+    Функция принимает на вход две матрицы: A и B размерностью size x size
+    Возвращает матрицу их произведения A * B = C
+
+    Реализуйте умножение матриц, используя функции из пакета numpy    """
+
+    return first @ second
+
+def no_numpy_mult_2(a, b):
     """
     A: list of "size" lists, each contains "size" floats --- первая матрица-аргумент
     B: list of "size" lists, each contains "size" floats --- вторая матрица-аргумент
@@ -48,24 +88,12 @@ def no_numpy_mult(a, b):
     return result
 
 
-def numpy_mult(first, second):
-    """
-    A: np.array[size, size]              --- первая матрица-аргумент
-    B: np.array[size, size]              --- вторая матрица-аргумент
-    return C: np.array[size, size]       --- матрица, являющаяся результатом умножения матриц A и B
-
-    Функция принимает на вход две матрицы: A и B размерностью size x size
-    Возвращает матрицу их произведения A * B = C
-
-    Реализуйте умножение матриц, используя функции из пакета numpy    """
-
-    return first @ second
-
 # a = np.random.sample((2, 5))
 # b = np.random.sample((5, 3))
+arr_a = [[0, 2, 4, 6, 8], [1, 3, 5, 7, 9]]
+arr_b = [[0, 5, 1], [1, 6, 2], [2, 7, 3], [3, 8, 4], [4, 0, 5]]
+a = np.array(arr_a, dtype = float)
+b = np.array(arr_b, dtype = float)
 
-a = np.array([[0, 2, 4, 6, 8], [1, 3, 5, 7, 9]], dtype = float)
-b = np.array([[0, 5, 1], [1, 6, 2], [2, 7, 3], [3, 8, 4], [4, 0, 5]], dtype = float)
-
-print(no_numpy_mult(a, b))
+print(no_numpy_mult(arr_a, arr_b))
 print(numpy_mult(a, b))
